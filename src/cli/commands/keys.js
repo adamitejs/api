@@ -1,6 +1,6 @@
 const Table = require('cli-table');
 
-module.exports = function(arc, vorpal) {
+module.exports = function(adamite, vorpal) {
   const logKeys = (keys) => {
     const table = new Table({ head: ['ID', 'Key', 'Origins', 'Created']});
     table.push(...keys.map(k => ([k.id, k.key, k.origins.join(', '), k.createdAt])));
@@ -10,14 +10,14 @@ module.exports = function(arc, vorpal) {
   vorpal
     .command('keys:list', 'Lists registered keys.')
     .action(function(args, callback) {
-      logKeys(arc.keys.getKeys());
+      logKeys(adamite.keys.getKeys());
       callback();
     });
 
   vorpal
     .command('keys:add [origins...]', 'Adds a key.')
     .action(function(args, callback) {
-      const newKey = arc.keys.addKey(args.origins);
+      const newKey = adamite.keys.addKey(args.origins);
       logKeys([newKey]);
       callback();
     });
@@ -26,7 +26,7 @@ module.exports = function(arc, vorpal) {
     .command('keys:check <key>', 'Checks if a key is valid.')
     .option('--origin <origin>')
     .action(function(args, callback) {
-      const matchingKey = arc.keys.findKey(args.key);
+      const matchingKey = adamite.keys.findKey(args.key);
       
       if (!matchingKey || (args.options.origin && !matchingKey.origins.includes(args.options.origin))) {
         console.log('\n👎  INVALID key: ' + args.key + '\n');

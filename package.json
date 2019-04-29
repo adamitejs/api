@@ -1,7 +1,7 @@
 {
-  "name": "@arc/api",
+  "name": "@adamite/api",
   "version": "0.1.0",
-  "description": "Central process to an Arc instance.",
+  "description": "Central process to an Adamite instance.",
   "main": "index.js",
   "license": "MIT",
   "scripts": {

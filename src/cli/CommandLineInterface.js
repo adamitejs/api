@@ -2,16 +2,16 @@ const vorpal = require('vorpal')();
 const keys = require('./commands/keys');
 
 class CommandLineInterface {
-  constructor(arc) {
-    this.arc = arc;
+  constructor(adamite) {
+    this.adamite = adamite;
     this.start();
   }
 
   start() {
-    keys(this.arc, vorpal);
+    keys(this.adamite, vorpal);
 
     vorpal
-      .delimiter(`${this.arc.config.name}$`)
+      .delimiter(`${this.adamite.config.name}$`)
       .show();
   }
 }

@@ -2,16 +2,16 @@ const { Router } = require('express');
 const basicAuth = require('express-basic-auth');
 const secretAuth = require('../middleware/secretAuth');
 
-module.exports = function(arc) {
+module.exports = function(adamite) {
   const router = new Router();
-  const requireBasicAuth = basicAuth({ users: arc.keys.getAdminUsers() });
-  const requireSecretAuth = secretAuth(arc);
+  const requireBasicAuth = basicAuth({ users: adamite.keys.getAdminUsers() });
+  const requireSecretAuth = secretAuth(adamite);
 
   router.get(
     '/secret',
     requireBasicAuth,
     function (req, res) {
-      res.status(200).end(arc.keys.getSecret());
+      res.status(200).end(adamite.keys.getSecret());
     }
   );
 
@@ -19,14 +19,14 @@ module.exports = function(arc) {
     '/',
     requireSecretAuth,
     function (req, res) {
-      res.json(arc.keys.getKeys());
+      res.json(adamite.keys.getKeys());
     }
   );
   
   router.get(
     '/:key',
     function (req, res) {
-      const key = arc.keys.findKey(req.params.key, req.query.origin);
+      const key = adamite.keys.findKey(req.params.key, req.query.origin);
       if (!key) return res.status(404).end();
       res.json(key);
     }
@@ -36,7 +36,7 @@ module.exports = function(arc) {
     '/',
     requireSecretAuth,
     function (req, res) {
-      const newKey = arc.keys.addKey(req.body.origins);
+      const newKey = adamite.keys.addKey(req.body.origins);
       res.json(newKey);
     }
   );

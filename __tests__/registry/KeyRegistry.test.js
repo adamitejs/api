@@ -20,15 +20,15 @@ describe('KeyRegistry', () => {
 
   describe('constructor', () => {
     it('should construct a KeyRegistry', () => {
-      const registry = new KeyRegistry('arc');
+      const registry = new KeyRegistry('adamite');
       expect(registry).toBeDefined();
-      expect(registry.arc).toBe('arc');
+      expect(registry.adamite).toBe('adamite');
     });
   });
 
   describe('getAdminUsers', () => {
     it('should return admin users from the config', () => {
-      const arc = {
+      const adamite = {
         config: {
           api: {
             admins: {
@@ -38,16 +38,16 @@ describe('KeyRegistry', () => {
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const admins = registry.getAdminUsers();
 
-      expect(admins).toEqual(arc.config.api.admins);
+      expect(admins).toEqual(adamite.config.api.admins);
     });
   });
 
   describe('getSecret', () => {
     it('should return the secret from the config', () => {
-      const arc = {
+      const adamite = {
         config: {
           api: {
             secret: '1234'
@@ -55,26 +55,26 @@ describe('KeyRegistry', () => {
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const secret = registry.getSecret();
 
-      expect(secret).toEqual(arc.config.api.secret);
+      expect(secret).toEqual(adamite.config.api.secret);
     });
   });
 
   describe('getKeys', () => {
-    it('should return the keys from the Arc database', () => {
+    it('should return the keys from the Adamite database', () => {
       const mockKeys = ['test'];
       const mockDbValue = jest.fn(() => mockKeys);
       const mockDbGet = jest.fn(() => ({ value: mockDbValue }));
       
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const keys = registry.getKeys();
 
       expect(mockDbGet).toBeCalledWith('keys');
@@ -90,13 +90,13 @@ describe('KeyRegistry', () => {
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
       
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.findKey('1234');
 
       expect(mockDbGet).toBeCalledWith('keys');
@@ -111,13 +111,13 @@ describe('KeyRegistry', () => {
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
       
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.findKey('1234', 'localhost');
 
       expect(mockDbGet).toBeCalledWith('keys');
@@ -132,13 +132,13 @@ describe('KeyRegistry', () => {
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
       
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.findKey('1234', '127.0.0.1');
 
       expect(key).toEqual(null);
@@ -150,13 +150,13 @@ describe('KeyRegistry', () => {
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
       
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.findKey('1234', '127.0.0.1');
 
       expect(key).toEqual(null);
@@ -169,13 +169,13 @@ describe('KeyRegistry', () => {
       const mockDbPush = jest.fn(() => ({ write: mockDbWrite }));
       const mockDbGet = jest.fn(() => ({ push: mockDbPush }));
 
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.addKey();
 
       expect(key).toEqual({
@@ -197,13 +197,13 @@ describe('KeyRegistry', () => {
       const mockDbPush = jest.fn(() => ({ write: mockDbWrite }));
       const mockDbGet = jest.fn(() => ({ push: mockDbPush }));
 
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       const key = registry.addKey(['localhost']);
 
       expect(key).toEqual({
@@ -228,13 +228,13 @@ describe('KeyRegistry', () => {
       const mockDbFind = jest.fn(() => ({ set: mockDbSet }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
 
-      const arc = {
+      const adamite = {
         db: {
           get: mockDbGet
         }
       };
 
-      const registry = new KeyRegistry(arc);
+      const registry = new KeyRegistry(adamite);
       registry.regenerateKey('1234');
 
       expect(mockDbGet).toBeCalledWith('keys');

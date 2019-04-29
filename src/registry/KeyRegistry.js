@@ -1,24 +1,24 @@
 const uuid = require('uuid');
 
 class KeyRegistry {
-  constructor(arc) {
-    this.arc = arc;
+  constructor(adamite) {
+    this.adamite = adamite;
   }
   
   getAdminUsers() {
-    return this.arc.config.api.admins;
+    return this.adamite.config.api.admins;
   }
 
   getSecret() {
-    return this.arc.config.api.secret;
+    return this.adamite.config.api.secret;
   }
 
   getKeys() {
-    return this.arc.db.get('keys').value();
+    return this.adamite.db.get('keys').value();
   }
 
   findKey(key, origin) {
-    const keys = this.arc.db.get('keys');
+    const keys = this.adamite.db.get('keys');
     const matchingKey = keys.find({ key }).value();
 
     if (!matchingKey) {
@@ -37,7 +37,7 @@ class KeyRegistry {
   }
 
   addKey(origins = []) {
-    const keys = this.arc.db.get('keys');
+    const keys = this.adamite.db.get('keys');
     
     const randomId = uuid.v4();
     const randomKey = Buffer.from(uuid.v4()).toString('base64');
@@ -56,7 +56,7 @@ class KeyRegistry {
 
   regenerateKey(id) {
     const randomKey = Buffer.from(uuid.v4()).toString('base64');
-    const keys = this.arc.db.get('keys');
+    const keys = this.adamite.db.get('keys');
     
     keys.find({ id }).set({
       key: randomKey,

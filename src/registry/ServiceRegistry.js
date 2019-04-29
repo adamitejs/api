@@ -1,6 +1,6 @@
 class ServiceRegistry {
-  constructor(arc) {
-    this.arc = arc;
+  constructor(adamite) {
+    this.adamite = adamite;
   }
 }
 

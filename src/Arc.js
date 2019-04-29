@@ -6,7 +6,7 @@ const ApiInterface = require('./api');
 const KeyRegistry = require('./registry/KeyRegistry');
 const ServiceRegistry = require('./registry/ServiceRegistry');
 
-class Arc {
+class Adamite {
   constructor(config) {
     this.config = config;
     this.initializeDatabase();
@@ -27,4 +27,4 @@ class Arc {
   }
 }
 
-module.exports = Arc;
+module.exports = Adamite;

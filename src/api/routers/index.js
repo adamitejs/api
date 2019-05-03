@@ -1,5 +1,5 @@
-const keys = require('./keys');
+const keys = require("./keys");
 
 module.exports = function(app, adamite) {
-  app.use('/api/keys', keys(adamite));
+  app.use("/api/keys", keys(adamite));
 };

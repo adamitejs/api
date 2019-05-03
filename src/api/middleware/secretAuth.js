@@ -6,4 +6,4 @@ module.exports = function(adamite) {
       res.status(401).end();
     }
   };
-}
+};

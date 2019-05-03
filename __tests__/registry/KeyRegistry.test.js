@@ -1,8 +1,8 @@
-const KeyRegistry = require('../../src/registry/KeyRegistry');
+const KeyRegistry = require("../../src/registry/KeyRegistry");
 
-jest.mock('uuid');
+jest.mock("uuid");
 
-describe('KeyRegistry', () => {
+describe("KeyRegistry", () => {
   const _timestamp = 1555974610091;
   const _now = global.Date.now;
 
@@ -15,24 +15,24 @@ describe('KeyRegistry', () => {
   });
 
   afterEach(() => {
-    require('uuid').v4.mockClear();
+    require("uuid").v4.mockClear();
   });
 
-  describe('constructor', () => {
-    it('should construct a KeyRegistry', () => {
-      const registry = new KeyRegistry('adamite');
+  describe("constructor", () => {
+    it("should construct a KeyRegistry", () => {
+      const registry = new KeyRegistry("adamite");
       expect(registry).toBeDefined();
-      expect(registry.adamite).toBe('adamite');
+      expect(registry.adamite).toBe("adamite");
     });
   });
 
-  describe('getAdminUsers', () => {
-    it('should return admin users from the config', () => {
+  describe("getAdminUsers", () => {
+    it("should return admin users from the config", () => {
       const adamite = {
         config: {
           api: {
             admins: {
-              'jesse': 1234
+              jesse: 1234
             }
           }
         }
@@ -45,12 +45,12 @@ describe('KeyRegistry', () => {
     });
   });
 
-  describe('getSecret', () => {
-    it('should return the secret from the config', () => {
+  describe("getSecret", () => {
+    it("should return the secret from the config", () => {
       const adamite = {
         config: {
           api: {
-            secret: '1234'
+            secret: "1234"
           }
         }
       };
@@ -62,12 +62,12 @@ describe('KeyRegistry', () => {
     });
   });
 
-  describe('getKeys', () => {
-    it('should return the keys from the Adamite database', () => {
-      const mockKeys = ['test'];
+  describe("getKeys", () => {
+    it("should return the keys from the Adamite database", () => {
+      const mockKeys = ["test"];
       const mockDbValue = jest.fn(() => mockKeys);
       const mockDbGet = jest.fn(() => ({ value: mockDbValue }));
-      
+
       const adamite = {
         db: {
           get: mockDbGet
@@ -77,19 +77,19 @@ describe('KeyRegistry', () => {
       const registry = new KeyRegistry(adamite);
       const keys = registry.getKeys();
 
-      expect(mockDbGet).toBeCalledWith('keys');
+      expect(mockDbGet).toBeCalledWith("keys");
       expect(mockDbValue).toBeCalled();
       expect(keys).toEqual(mockKeys);
     });
   });
 
-  describe('findKey', () => {
-    it('should return the matching key', () => {
-      const mockKey = { id: 'test', origins: [] };
+  describe("findKey", () => {
+    it("should return the matching key", () => {
+      const mockKey = { id: "test", origins: [] };
       const mockDbValue = jest.fn(() => mockKey);
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
-      
+
       const adamite = {
         db: {
           get: mockDbGet
@@ -97,20 +97,20 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      const key = registry.findKey('1234');
+      const key = registry.findKey("1234");
 
-      expect(mockDbGet).toBeCalledWith('keys');
-      expect(mockDbFind).toBeCalledWith({ key: '1234' });
+      expect(mockDbGet).toBeCalledWith("keys");
+      expect(mockDbFind).toBeCalledWith({ key: "1234" });
       expect(mockDbValue).toBeCalled();
       expect(key).toEqual(mockKey);
     });
 
-    it('should return the matching key if the key has an origin', () => {
-      const mockKey = { id: 'test', origins: ['localhost'] };
+    it("should return the matching key if the key has an origin", () => {
+      const mockKey = { id: "test", origins: ["localhost"] };
       const mockDbValue = jest.fn(() => mockKey);
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
-      
+
       const adamite = {
         db: {
           get: mockDbGet
@@ -118,20 +118,20 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      const key = registry.findKey('1234', 'localhost');
+      const key = registry.findKey("1234", "localhost");
 
-      expect(mockDbGet).toBeCalledWith('keys');
-      expect(mockDbFind).toBeCalledWith({ key: '1234' });
+      expect(mockDbGet).toBeCalledWith("keys");
+      expect(mockDbFind).toBeCalledWith({ key: "1234" });
       expect(mockDbValue).toBeCalled();
       expect(key).toEqual(mockKey);
     });
 
-    it('should not return the matching key if the origin doesnt match', () => {
-      const mockKey = { id: 'test', origins: ['localhost'] };
+    it("should not return the matching key if the origin doesnt match", () => {
+      const mockKey = { id: "test", origins: ["localhost"] };
       const mockDbValue = jest.fn(() => mockKey);
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
-      
+
       const adamite = {
         db: {
           get: mockDbGet
@@ -139,17 +139,17 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      const key = registry.findKey('1234', '127.0.0.1');
+      const key = registry.findKey("1234", "127.0.0.1");
 
       expect(key).toEqual(null);
     });
 
-    it('should return null if a key isnt found', () => {
+    it("should return null if a key isnt found", () => {
       const mockKey = null;
       const mockDbValue = jest.fn(() => mockKey);
       const mockDbFind = jest.fn(() => ({ value: mockDbValue }));
       const mockDbGet = jest.fn(() => ({ find: mockDbFind }));
-      
+
       const adamite = {
         db: {
           get: mockDbGet
@@ -157,14 +157,14 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      const key = registry.findKey('1234', '127.0.0.1');
+      const key = registry.findKey("1234", "127.0.0.1");
 
       expect(key).toEqual(null);
     });
   });
 
-  describe('addKey', () => {
-    it('should generate and add the key', () => {
+  describe("addKey", () => {
+    it("should generate and add the key", () => {
       const mockDbWrite = jest.fn();
       const mockDbPush = jest.fn(() => ({ write: mockDbWrite }));
       const mockDbGet = jest.fn(() => ({ push: mockDbPush }));
@@ -179,20 +179,20 @@ describe('KeyRegistry', () => {
       const key = registry.addKey();
 
       expect(key).toEqual({
-        id: 'abc1234',
-        key: Buffer.from('abc1234').toString('base64'),
+        id: "abc1234",
+        key: Buffer.from("abc1234").toString("base64"),
         createdAt: _timestamp,
         updatedAt: _timestamp,
         origins: []
       });
 
-      expect(require('uuid').v4.mock.calls.length).toBe(2);
-      expect(mockDbGet).toBeCalledWith('keys');
+      expect(require("uuid").v4.mock.calls.length).toBe(2);
+      expect(mockDbGet).toBeCalledWith("keys");
       expect(mockDbPush).toBeCalledWith(key);
       expect(mockDbWrite).toBeCalled();
     });
 
-    it('should generate and add the key with origins', () => {
+    it("should generate and add the key with origins", () => {
       const mockDbWrite = jest.fn();
       const mockDbPush = jest.fn(() => ({ write: mockDbWrite }));
       const mockDbGet = jest.fn(() => ({ push: mockDbPush }));
@@ -204,25 +204,25 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      const key = registry.addKey(['localhost']);
+      const key = registry.addKey(["localhost"]);
 
       expect(key).toEqual({
-        id: 'abc1234',
-        key: Buffer.from('abc1234').toString('base64'),
+        id: "abc1234",
+        key: Buffer.from("abc1234").toString("base64"),
         createdAt: _timestamp,
         updatedAt: _timestamp,
-        origins: ['localhost']
+        origins: ["localhost"]
       });
 
-      expect(require('uuid').v4.mock.calls.length).toBe(2);
-      expect(mockDbGet).toBeCalledWith('keys');
+      expect(require("uuid").v4.mock.calls.length).toBe(2);
+      expect(mockDbGet).toBeCalledWith("keys");
       expect(mockDbPush).toBeCalledWith(key);
       expect(mockDbWrite).toBeCalled();
     });
   });
 
-  describe('regenerateKey', () => {
-    it('should generate and add the key', () => {
+  describe("regenerateKey", () => {
+    it("should generate and add the key", () => {
       const mockDbWrite = jest.fn();
       const mockDbSet = jest.fn(() => ({ write: mockDbWrite }));
       const mockDbFind = jest.fn(() => ({ set: mockDbSet }));
@@ -235,13 +235,13 @@ describe('KeyRegistry', () => {
       };
 
       const registry = new KeyRegistry(adamite);
-      registry.regenerateKey('1234');
+      registry.regenerateKey("1234");
 
-      expect(mockDbGet).toBeCalledWith('keys');
-      expect(mockDbFind).toBeCalledWith({ id: '1234' });
-      
+      expect(mockDbGet).toBeCalledWith("keys");
+      expect(mockDbFind).toBeCalledWith({ id: "1234" });
+
       expect(mockDbSet).toBeCalledWith({
-        key: Buffer.from('abc1234').toString('base64'),
+        key: Buffer.from("abc1234").toString("base64"),
         updatedAt: _timestamp
       });
 

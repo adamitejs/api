@@ -1,6 +1,6 @@
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const slowDown = require('express-slow-down');
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const slowDown = require("express-slow-down");
 
 module.exports = function(app) {
   // app.use(slowDown({

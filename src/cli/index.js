@@ -1,1 +1,1 @@
-module.exports = require('./CommandLineInterface');
+module.exports = require("./CommandLineInterface");

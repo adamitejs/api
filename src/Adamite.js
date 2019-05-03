@@ -1,10 +1,10 @@
-const fs = require('fs');
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const CommandLineInterface = require('./cli');
-const ApiInterface = require('./api');
-const KeyRegistry = require('./registry/KeyRegistry');
-const ServiceRegistry = require('./registry/ServiceRegistry');
+const fs = require("fs");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const CommandLineInterface = require("./cli");
+const ApiInterface = require("./api");
+const KeyRegistry = require("./registry/KeyRegistry");
+const ServiceRegistry = require("./registry/ServiceRegistry");
 
 class Adamite {
   constructor(config) {
@@ -17,8 +17,8 @@ class Adamite {
   }
 
   initializeDatabase() {
-    if (!fs.existsSync('data')) fs.mkdirSync('data');
-    this.db = low(new FileSync('data/api.json'));
+    if (!fs.existsSync("data")) fs.mkdirSync("data");
+    this.db = low(new FileSync("data/api.json"));
     this.db.defaults({ keys: [] }).write();
   }
 

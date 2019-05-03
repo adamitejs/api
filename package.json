@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "format": "prettier --print-width 120 --write \"**/*.js\"",
     "test": "jest"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "vorpal": "^1.12.0"
   },
   "devDependencies": {
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0"
   }
 }

@@ -1,5 +1,5 @@
-const vorpal = require('vorpal')();
-const keys = require('./commands/keys');
+const vorpal = require("vorpal")();
+const keys = require("./commands/keys");
 
 class CommandLineInterface {
   constructor(adamite) {
@@ -10,9 +10,7 @@ class CommandLineInterface {
   start() {
     keys(this.adamite, vorpal);
 
-    vorpal
-      .delimiter(`${this.adamite.config.name}$`)
-      .show();
+    vorpal.delimiter(`${this.adamite.config.name}$`).show();
   }
 }
 

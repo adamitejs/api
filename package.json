@@ -31,6 +31,9 @@
     }
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   }

@@ -5,30 +5,30 @@ The Adamite API server allows other services in your Adamite instance to verify 
 
 ---
 
-## This package is internal to Adamite, so if you just want to use Adamite, we suggest reading our [Getting Started](https://adamite.gitbook.io/docs/adamite-server/get-started) guide instead.
+### This package is internal to Adamite, so if you just want to use Adamite, we suggest reading our [Getting Started](https://adamite.gitbook.io/docs/adamite-server/get-started) guide instead.
 
 ---
 
-# Installation
+## Installation
 
 ```js
 yarn add @adamite/api
 ```
 
-# Quick Start
+## Quick Start
 
 ```js
 const api = require("@adamite/api");
 api(require("./adamite.js")); // your adamite config file
 ```
 
-# Documentation
+## Documentation
 
 You can find the Adamite documentation [on our website](https://adamite.gitbook.io/docs).
 
 For a quick overview of Adamite, check out the [getting started](https://adamite.gitbook.io/docs/adamite-server/get-started) guide.
 
-# About Adamite
+## About Adamite
 
 Adamite is an open source, self host-able, platform as a service.
 
@@ -38,10 +38,10 @@ Adamite is an open source, self host-able, platform as a service.
 
 - **Scale with Adamite:** You're in control of your Adamite instance, and can customize it to fit your needs, even beyond an initial MVP.
 
-## [Contributing](CONTRIBUTING.md)
+### Contributing
 
 Adamite is open source and welcomes contributions. For more information, read our [Contribution Guide](https://adamite.gitbook.io/docs/organization/contributing-to-adamite).
 
-## [License](LICENSE.md)
+### License
 
 Adamite is [MIT licensed](LICENSE.md).

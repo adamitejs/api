@@ -12,7 +12,7 @@ class Adamite {
     this.initializeDatabase();
     this.keys = new KeyRegistry(this);
     this.services = new ServiceRegistry(this);
-    this.cli = new CommandLineInterface(this);
+    // this.cli = new CommandLineInterface(this);
     this.api = new ApiInterface(this);
   }
 
